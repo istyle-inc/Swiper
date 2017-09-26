@@ -10,7 +10,7 @@
  * 
  * Licensed under MIT
  * 
- * Released on: March 10, 2017
+ * Released on: September 21, 2017
  */
 (function () {
     'use strict';
@@ -137,6 +137,8 @@
             paginationFractionRender: null,
             paginationCustomRender: null,
             paginationType: 'bullets', // 'bullets' or 'progress' or 'fraction' or 'custom'
+            fitSlideGroupWithBlank: false,
+            blankClass: 'swiper-invisible-blank-slide',
             // Resistance
             resistance: true,
             resistanceRatio: 0.85,
@@ -437,7 +439,7 @@
             }
         
             if (s.params.paginationType === 'bullets' && s.params.paginationClickable) {
-                s.paginationContainer.addClass(s.params.paginationModifierClass + 'clickable');
+                s.paginationContainer.addClass(s.params.paginationClickableClass);
             }
             else {
                 s.params.paginationClickable = false;
@@ -1272,6 +1274,8 @@
           Resize Handler
           ===========================*/
         s.onResize = function (forceUpdatePagination) {
+            if (s.container[0] && s.container[0].offsetWidth === 0) return;
+        
             if (s.params.onBeforeResize) s.params.onBeforeResize(s);
             //Breakpoints
             if (s.params.breakpoints) {
@@ -1338,7 +1342,7 @@
         
         // WP8 Touch Events Fix
         if (window.navigator.pointerEnabled || window.navigator.msPointerEnabled) {
-            (s.params.touchEventsTarget === 'container' ? s.container : s.wrapper).addClass('swiper-wp8-' + s.params.direction);
+            (s.params.touchEventsTarget === 'container' ? s.container : s.wrapper).addClass(s.params.containerModifierClass + 'wp8-' + s.params.direction);
         }
         
         // Attach/detach events
@@ -2029,6 +2033,10 @@
             s.snapIndex = Math.floor(slideIndex / s.params.slidesPerGroup);
             if (s.snapIndex >= s.snapGrid.length) s.snapIndex = s.snapGrid.length - 1;
         
+            if ((s.activeIndex || s.initialSlide || 0) === (s.previousIndex || 0) && runCallbacks) {
+                s.emit('beforeSlideChangeStart', s);
+            }
+        
             var translate = - s.snapGrid[s.snapIndex];
             // Stop autoplay
             if (s.params.autoplay && s.autoplaying) {
@@ -2363,6 +2371,17 @@
             s.wrapper.children('.' + s.params.slideClass + '.' + s.params.slideDuplicateClass).remove();
         
             var slides = s.wrapper.children('.' + s.params.slideClass);
+        
+            if (s.params.fitSlideGroupWithBlank) {
+                var blankSlidesNum = s.params.slidesPerGroup - slides.length % s.params.slidesPerGroup;
+                if (blankSlidesNum !== s.params.slidesPerGroup) {
+                    for (var i = 0; i < blankSlidesNum; i++) {
+                        var blankNode = $(document.createElement('div')).addClass(s.params.slideClass + ' ' + s.params.blankClass);
+                        s.wrapper.append(blankNode);
+                    }
+                    slides = s.wrapper.children();
+                }
+            }
         
             if(s.params.slidesPerView === 'auto' && !s.params.loopedSlides) s.params.loopedSlides = slides.length;
         
@@ -4477,7 +4496,13 @@
             // Destroy callback
             s.emit('onDestroy');
             // Delete instance
-            if (deleteInstance !== false) s = null;
+            if (deleteInstance !== false){
+                s.container[0].swiper = null;
+                s.container.data('swiper', null);
+                s.container = null;
+                s.wrapper = null;
+                s = null;
+            }
         };
         
         s.init();
