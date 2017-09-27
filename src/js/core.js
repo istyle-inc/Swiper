@@ -47,8 +47,6 @@ var defaults = {
     fade: {
         crossFade: false
     },
-    // Parallax
-    parallax: false,
     // Zoom
     zoom: false,
     zoomMax: 3,
@@ -358,7 +356,7 @@ if (s.params.autoHeight) {
     s.classNames.push(s.params.containerModifierClass + 'autoheight');
 }
 // Enable slides progress when required
-if (s.params.parallax || s.params.watchSlidesVisibility) {
+if (s.params.watchSlidesVisibility) {
     s.params.watchSlidesProgress = true;
 }
 // Max resistance when touchReleaseOnEdges
@@ -2172,9 +2170,6 @@ s.setWrapperTransition = function (duration, byController) {
     if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
         s.effects[s.params.effect].setTransition(duration);
     }
-    if (s.params.parallax && s.parallax) {
-        s.parallax.setTransition(duration);
-    }
     if (s.params.scrollbar && s.scrollbar) {
         s.scrollbar.setTransition(duration);
     }
@@ -2220,9 +2215,6 @@ s.setWrapperTranslate = function (translate, updateActiveIndex, byController) {
     if (updateActiveIndex) s.updateActiveIndex();
     if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
         s.effects[s.params.effect].setTranslate(s.translate);
-    }
-    if (s.params.parallax && s.parallax) {
-        s.parallax.setTranslate(s.translate);
     }
     if (s.params.scrollbar && s.scrollbar) {
         s.scrollbar.setTranslate(s.translate);

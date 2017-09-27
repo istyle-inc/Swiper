@@ -59,10 +59,6 @@
         "js": ["src/js/mousewheel.js"],
         "less": []
     },
-    "parallax": {
-        "js": ["src/js/parallax.js"],
-        "less": []
-    },
     "zoom": {
         "js": ["src/js/zoom.js"],
         "less": ["src/less/zoom.less"]
