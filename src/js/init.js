@@ -6,23 +6,12 @@ s.init = function () {
     s.updateContainerSize();
     s.updateSlidesSize();
     s.updatePagination();
-    if (s.params.scrollbar && s.scrollbar) {
-        s.scrollbar.set();
-        if (s.params.scrollbarDraggable) {
-            s.scrollbar.enableDraggable();
-        }
-    }
-    if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
-        if (!s.params.loop) s.updateProgress();
-        s.effects[s.params.effect].setTranslate();
-    }
     if (s.params.loop) {
         s.slideTo(s.params.initialSlide + s.loopedSlides, 0, s.params.runCallbacksOnInit);
     }
     else {
         s.slideTo(s.params.initialSlide, 0, s.params.runCallbacksOnInit);
         if (s.params.initialSlide === 0) {
-            if (s.parallax && s.params.parallax) s.parallax.setTranslate();
             if (s.lazy && s.params.lazyLoading) {
                 s.lazy.load();
                 s.lazy.initialImageLoaded = true;
@@ -95,12 +84,6 @@ s.cleanupStyles = function () {
     // Buttons
     if (s.params.prevButton) $(s.params.prevButton).removeClass(s.params.buttonDisabledClass);
     if (s.params.nextButton) $(s.params.nextButton).removeClass(s.params.buttonDisabledClass);
-
-    // Scrollbar
-    if (s.params.scrollbar && s.scrollbar) {
-        if (s.scrollbar.track && s.scrollbar.track.length) s.scrollbar.track.removeAttr('style');
-        if (s.scrollbar.drag && s.scrollbar.drag.length) s.scrollbar.drag.removeAttr('style');
-    }
 };
 
 // Destroy
@@ -109,12 +92,6 @@ s.destroy = function (deleteInstance, cleanupStyles) {
     s.detachEvents();
     // Stop autoplay
     s.stopAutoplay();
-    // Disable draggable
-    if (s.params.scrollbar && s.scrollbar) {
-        if (s.params.scrollbarDraggable) {
-            s.scrollbar.disableDraggable();
-        }
-    }
     // Destroy loop
     if (s.params.loop) {
         s.destroyLoop();

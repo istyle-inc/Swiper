@@ -27,17 +27,9 @@
         ],
         "less": []
     },
-    "effects": {
-        "js": ["src/js/effects.js"],
-        "less": ["src/less/effects.less"]
-    },
     "lazy-load": {
         "js": ["src/js/lazy-load.js"],
         "less": []
-    },
-    "scrollbar": {
-        "js": ["src/js/scrollbar.js"],
-        "less": ["src/less/scrollbar.less"]
     },
     "controller": {
         "js": ["src/js/controller.js"],
@@ -57,10 +49,6 @@
     },
     "mousewheel": {
         "js": ["src/js/mousewheel.js"],
-        "less": []
-    },
-    "parallax": {
-        "js": ["src/js/parallax.js"],
         "less": []
     },
     "zoom": {
