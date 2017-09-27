@@ -31,10 +31,6 @@
         "js": ["src/js/lazy-load.js"],
         "less": []
     },
-    "scrollbar": {
-        "js": ["src/js/scrollbar.js"],
-        "less": ["src/less/scrollbar.less"]
-    },
     "controller": {
         "js": ["src/js/controller.js"],
         "less": []

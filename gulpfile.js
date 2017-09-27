@@ -48,7 +48,6 @@
                 'src/js/swiper-intro.js',
                 'src/js/core.js',
                 'src/js/lazy-load.js',
-                'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
                 'src/js/history.js',
@@ -72,7 +71,6 @@
                 'src/js/swiper-intro.js',
                 'src/js/core.js',
                 'src/js/lazy-load.js',
-                'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
                 'src/js/history.js',
@@ -95,7 +93,6 @@
                 'src/js/swiper-intro.js',
                 'src/js/core.js',
                 'src/js/lazy-load.js',
-                'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/hashnav.js',
                 'src/js/history.js',
@@ -116,7 +113,6 @@
                 'src/js/swiper-intro-f7.js',
                 'src/js/core.js',
                 'src/js/lazy-load.js',
-                'src/js/scrollbar.js',
                 'src/js/controller.js',
                 'src/js/zoom.js',
                 'src/js/plugins.js',
@@ -250,7 +246,6 @@
                 paths.source.styles + 'navigation-f7.less',
                 paths.source.styles + 'effects.less',
                 paths.source.styles + 'zoom.less',
-                paths.source.styles + 'scrollbar.less',
                 paths.source.styles + 'preloader-f7.less'
             ])
             .pipe(concat(swiper.filename + '.framework7.less'))

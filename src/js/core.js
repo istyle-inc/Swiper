@@ -39,11 +39,6 @@ var defaults = {
     zoomMax: 3,
     zoomMin: 1,
     zoomToggle: true,
-    // Scrollbar
-    scrollbar: null,
-    scrollbarHide: true,
-    scrollbarDraggable: false,
-    scrollbarSnapOnRelease: false,
     // Keyboard Mousewheel
     keyboardControl: false,
     mousewheelControl: false,
@@ -1159,9 +1154,6 @@ s.update = function (updateTranslate) {
     s.updateProgress();
     s.updatePagination();
     s.updateClasses();
-    if (s.params.scrollbar && s.scrollbar) {
-        s.scrollbar.set();
-    }
     var newTranslate;
     function forceSetTranslate() {
         var translate = s.rtl ? -s.translate : s.translate;
@@ -1218,9 +1210,6 @@ s.onResize = function (forceUpdatePagination) {
     s.updateContainerSize();
     s.updateSlidesSize();
     if (s.params.slidesPerView === 'auto' || s.params.freeMode || forceUpdatePagination) s.updatePagination();
-    if (s.params.scrollbar && s.scrollbar) {
-        s.scrollbar.set();
-    }
     if (s.controller && s.controller.spline) {
         s.controller.spline = undefined;
     }
@@ -2119,9 +2108,6 @@ s.enableTouchControl = function () {
   ===========================*/
 s.setWrapperTransition = function (duration, byController) {
     s.wrapper.transition(duration);
-    if (s.params.scrollbar && s.scrollbar) {
-        s.scrollbar.setTransition(duration);
-    }
     if (s.params.control && s.controller) {
         s.controller.setTransition(duration, byController);
     }
@@ -2162,9 +2148,6 @@ s.setWrapperTranslate = function (translate, updateActiveIndex, byController) {
     }
 
     if (updateActiveIndex) s.updateActiveIndex();
-    if (s.params.scrollbar && s.scrollbar) {
-        s.scrollbar.setTranslate(s.translate);
-    }
     if (s.params.control && s.controller) {
         s.controller.setTranslate(s.translate, byController);
     }
