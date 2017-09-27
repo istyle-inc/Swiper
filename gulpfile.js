@@ -244,7 +244,6 @@
         gulp.src([
                 paths.source.styles + 'core.less',
                 paths.source.styles + 'navigation-f7.less',
-                paths.source.styles + 'effects.less',
                 paths.source.styles + 'zoom.less',
                 paths.source.styles + 'preloader-f7.less'
             ])

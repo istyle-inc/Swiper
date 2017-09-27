@@ -50,7 +50,7 @@
             // Virtual Translate
             virtualTranslate: false,
             // Effects
-            effect: 'slide', // 'slide' or 'fade' or 'cube' or 'coverflow' or 'flip'
+            effect: 'slide', // 'slide' only
             coverflow: {
                 rotate: 50,
                 stretch: 0,
