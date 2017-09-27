@@ -27,10 +27,6 @@
         ],
         "less": []
     },
-    "effects": {
-        "js": ["src/js/effects.js"],
-        "less": ["src/less/effects.less"]
-    },
     "lazy-load": {
         "js": ["src/js/lazy-load.js"],
         "less": []

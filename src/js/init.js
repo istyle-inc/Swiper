@@ -12,10 +12,6 @@ s.init = function () {
             s.scrollbar.enableDraggable();
         }
     }
-    if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
-        if (!s.params.loop) s.updateProgress();
-        s.effects[s.params.effect].setTranslate();
-    }
     if (s.params.loop) {
         s.slideTo(s.params.initialSlide + s.loopedSlides, 0, s.params.runCallbacksOnInit);
     }

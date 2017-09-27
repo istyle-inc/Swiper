@@ -34,19 +34,6 @@ var defaults = {
         modifier: 1,
         slideShadows : true
     },
-    flip: {
-        slideShadows : true,
-        limitRotation: true
-    },
-    cube: {
-        slideShadows: true,
-        shadow: true,
-        shadowOffset: 20,
-        shadowScale: 0.94
-    },
-    fade: {
-        crossFade: false
-    },
     // Zoom
     zoom: false,
     zoomMax: 3,
@@ -362,38 +349,6 @@ if (s.params.watchSlidesVisibility) {
 // Max resistance when touchReleaseOnEdges
 if (s.params.touchReleaseOnEdges) {
     s.params.resistanceRatio = 0;
-}
-// Coverflow / 3D
-if (['cube', 'coverflow', 'flip'].indexOf(s.params.effect) >= 0) {
-    if (s.support.transforms3d) {
-        s.params.watchSlidesProgress = true;
-        s.classNames.push(s.params.containerModifierClass + '3d');
-    }
-    else {
-        s.params.effect = 'slide';
-    }
-}
-if (s.params.effect !== 'slide') {
-    s.classNames.push(s.params.containerModifierClass + s.params.effect);
-}
-if (s.params.effect === 'cube') {
-    s.params.resistanceRatio = 0;
-    s.params.slidesPerView = 1;
-    s.params.slidesPerColumn = 1;
-    s.params.slidesPerGroup = 1;
-    s.params.centeredSlides = false;
-    s.params.spaceBetween = 0;
-    s.params.virtualTranslate = true;
-}
-if (s.params.effect === 'fade' || s.params.effect === 'flip') {
-    s.params.slidesPerView = 1;
-    s.params.slidesPerColumn = 1;
-    s.params.slidesPerGroup = 1;
-    s.params.watchSlidesProgress = true;
-    s.params.spaceBetween = 0;
-    if (typeof initialVirtualTranslate === 'undefined') {
-        s.params.virtualTranslate = true;
-    }
 }
 
 // Grab Cursor
@@ -839,7 +794,7 @@ s.updateSlidesSize = function () {
     var newSlidesGrid;
 
     if (
-        s.rtl && s.wrongRTL && (s.params.effect === 'slide' || s.params.effect === 'coverflow')) {
+        s.rtl && s.wrongRTL && (s.params.effect === 'slide')) {
         s.wrapper.css({width: s.virtualSize + s.params.spaceBetween + 'px'});
     }
     if (!s.support.flexbox || s.params.setWrapperSize) {
@@ -2051,9 +2006,6 @@ s.slideTo = function (slideIndex, speed, runCallbacks, internal) {
             s.updateAutoHeight();
         }
         s.updateClasses();
-        if (s.params.effect !== 'slide') {
-            s.setWrapperTranslate(translate);
-        }
         return false;
     }
     s.updateClasses();
@@ -2167,9 +2119,6 @@ s.enableTouchControl = function () {
   ===========================*/
 s.setWrapperTransition = function (duration, byController) {
     s.wrapper.transition(duration);
-    if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
-        s.effects[s.params.effect].setTransition(duration);
-    }
     if (s.params.scrollbar && s.scrollbar) {
         s.scrollbar.setTransition(duration);
     }
@@ -2213,9 +2162,6 @@ s.setWrapperTranslate = function (translate, updateActiveIndex, byController) {
     }
 
     if (updateActiveIndex) s.updateActiveIndex();
-    if (s.params.effect !== 'slide' && s.effects[s.params.effect]) {
-        s.effects[s.params.effect].setTranslate(s.translate);
-    }
     if (s.params.scrollbar && s.scrollbar) {
         s.scrollbar.setTranslate(s.translate);
     }
